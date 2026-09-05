@@ -1,0 +1,23 @@
+name: Build Hub web
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Beszel tag
+        required: true
+        default: v0.18.8
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: VERSION="${{ inputs.version }}" bash script/build.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: beszel-hub-web-${{ inputs.version }}
+          path: dist
