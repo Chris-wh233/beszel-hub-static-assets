@@ -1,4 +1,4 @@
-name: Build Hub web
+name: Build Hub Static Assets
 
 on:
   workflow_dispatch:
@@ -19,5 +19,5 @@ jobs:
       - run: VERSION="${{ inputs.version }}" bash script/build.sh
       - uses: actions/upload-artifact@v4
         with:
-          name: beszel-hub-web-${{ inputs.version }}
+          name: beszel-hub-static-assets-${{ inputs.version }}
           path: dist
